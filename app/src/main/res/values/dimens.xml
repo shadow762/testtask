@@ -1,0 +1,8 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <dimen name="horizontal_margin">16dp</dimen>
+    <dimen name="vertical_margin">16dp</dimen>
+    <dimen name="images_horizontal_margin">8dp</dimen>
+    <dimen name="images_vertical_margin">8dp</dimen>
+    <dimen name="gutter1">16dp</dimen>
+    <dimen name="images_gutter">8dp</dimen>
+</resources>
