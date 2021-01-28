@@ -7,7 +7,8 @@
     android:layout_height="match_parent"
     tools:context=".ui.main.ListFragment"
     android:paddingHorizontal="@dimen/images_horizontal_margin"
-    android:paddingTop="@dimen/images_vertical_margin">
+    android:paddingTop="@dimen/images_vertical_margin"
+    android:background="#ededed">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/civilization_list"

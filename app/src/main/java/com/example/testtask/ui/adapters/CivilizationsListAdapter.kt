@@ -13,8 +13,9 @@ import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.civilization_grid_item.view.*
 
 
-class CivilizationsListAdapter constructor(
-    private val context: Context
+class CivilizationsListAdapter(
+    private val context: Context,
+    private val clickEvent: (Civilization) -> Unit
 ) : RecyclerView.Adapter<CivilizationsListAdapter.CivilizationViewHolder>() {
     private var civilizations: List<Civilization> = listOf()
 
@@ -51,13 +52,13 @@ class CivilizationsListAdapter constructor(
 
     override fun getItemCount(): Int = civilizations.size
 
-    override fun onBindViewHolder(holder: CivilizationViewHolder, position: Int) = holder.bind(civilizations[position])
+    override fun onBindViewHolder(holder: CivilizationViewHolder, position: Int) = holder.bind(civilizations[position], clickEvent)
 
-    inner class CivilizationViewHolder(mView: View, val viewType: Int) : RecyclerView.ViewHolder(mView) {
+    inner class CivilizationViewHolder(private val mView: View, val viewType: Int) : RecyclerView.ViewHolder(mView) {
         private val mImageView: ImageView = mView.image_civilization
         private val mTextView: TextView = mView.name_civilization
 
-        fun bind(item: Civilization) {
+        fun bind(item: Civilization, clickEvent: (Civilization) -> Unit) {
             Picasso.Builder(context).build().load(R.drawable.poster)
                 .fit()
                 .placeholder(R.drawable.ic_image_placeholder)
@@ -65,6 +66,14 @@ class CivilizationsListAdapter constructor(
                 .into(mImageView)
 
             mTextView.text = item.name
+
+            mView.setOnClickListener {
+                clickEvent(item)
+            }
         }
     }
+}
+
+interface OnItemClickListener{
+    fun onItemClicked(civilization: Civilization)
 }

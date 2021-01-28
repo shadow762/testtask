@@ -5,4 +5,6 @@
     <dimen name="images_vertical_margin">8dp</dimen>
     <dimen name="gutter1">16dp</dimen>
     <dimen name="images_gutter">8dp</dimen>
+    <dimen name="horizontal_padding">8dp</dimen>
+    <dimen name="vertical_padding">8dp</dimen>
 </resources>

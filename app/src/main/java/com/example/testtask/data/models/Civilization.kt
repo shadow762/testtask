@@ -2,6 +2,7 @@ package com.example.testtask.data.models
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class Civilization(
     @SerializedName("id")
@@ -29,4 +30,4 @@ data class Civilization(
     @Expose
     val civilization_bonus: List<String>
 
-)
+): Serializable
