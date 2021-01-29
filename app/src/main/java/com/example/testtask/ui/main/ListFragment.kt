@@ -67,8 +67,10 @@ class ListFragment : BaseFragment() {
 
         viewModel = ViewModelProvider(requireActivity(), viewModelFactory).get(MainViewModel::class.java)
 
-        viewModel.getCivilizations()
         viewModel.civilizationsList.observe(viewLifecycleOwner, {
+            if(it.isEmpty()) {
+                viewModel.refreshCivilizations()
+            }
             viewAdapter.setItems(it)
         })
 
