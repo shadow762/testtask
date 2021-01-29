@@ -1,5 +1,6 @@
 package com.example.testtask.ui.main
 
+import android.content.res.Configuration
 import android.graphics.Rect
 import android.os.Bundle
 import android.view.View
@@ -22,7 +23,9 @@ class ListFragment : BaseFragment() {
     private lateinit var viewAdapter: CivilizationsListAdapter
     private lateinit var viewManager: RecyclerView.LayoutManager
 
-    private val gridItemCount: Int = 2
+    private val gridItemCountPortrait: Int = 2
+    private val gridItemCountLandscape: Int = 4
+    private var currentGridItemCount: Int = 2
 
     private var gutter: Int = 0
 
@@ -45,7 +48,13 @@ class ListFragment : BaseFragment() {
         gutter = (resources.getDimension(R.dimen.images_gutter) / 2).toInt()
 
         if(!this::viewManager.isInitialized) {
-            viewManager = GridLayoutManager(requireActivity(), gridItemCount)
+            if(requireActivity().resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT){
+                currentGridItemCount = gridItemCountPortrait
+            } else {
+                currentGridItemCount = gridItemCountLandscape
+            }
+
+            viewManager = GridLayoutManager(requireActivity(), currentGridItemCount)
         }
 
         if(!this::viewAdapter.isInitialized) {
@@ -107,7 +116,7 @@ class ListFragment : BaseFragment() {
                         super.getItemOffsets(outRect, view, parent, state)
 
                         val position = parent.getChildAdapterPosition(view) // item position
-                        val column: Int = position % gridItemCount // item column
+                        val column: Int = position % currentGridItemCount // item column
 
                         outRect.bottom = (gutter) * 2
 
@@ -117,7 +126,7 @@ class ListFragment : BaseFragment() {
                         }
 
                         // Last column doesn't nave right padding
-                        if (column != (gridItemCount - 1)) {
+                        if (column != (currentGridItemCount - 1)) {
                             outRect.right = (gutter)
                         }
                     }
