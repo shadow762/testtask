@@ -6,6 +6,7 @@ import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.testtask.MainActivity
 import com.example.testtask.R
 import com.example.testtask.data.models.Civilization
 import com.example.testtask.ui.adapters.CivilizationsListAdapter
@@ -37,6 +38,8 @@ class ListFragment : BaseFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
+        (activity as MainActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(false)
 
         gutter = (resources.getDimension(R.dimen.images_gutter) / 2).toInt()
 

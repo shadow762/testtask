@@ -89,4 +89,8 @@
         "For example, position the FAB to one side of stream of a cards so the FAB won’t interfere "
         "when a user tries to pick up one of cards.\n\n"
     </string>
+    <string name="name">Name</string>
+    <string name="expansion">Expansion</string>
+    <string name="army_type">Army type</string>
+    <string name="team_bonus">Team bonus</string>
 </resources>
