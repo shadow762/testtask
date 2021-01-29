@@ -13,6 +13,9 @@ import javax.inject.Inject
 class MainViewModel @Inject constructor(
     private val civilizationsRepository: ICivilizationsRepository,
 ) : BaseViewModel() {
+    private val _loading = MutableLiveData(false)
+    val loading: LiveData<Boolean> = _loading
+
     private val _civilizationsList = MutableLiveData<List<Civilization>>()
     val civilizationsList: LiveData<List<Civilization>> = _civilizationsList
 
@@ -20,7 +23,9 @@ class MainViewModel @Inject constructor(
         viewModelScope.launch {
 
             withContext(IO) {
+                _loading.postValue(true)
                 _civilizationsList.postValue(civilizationsRepository.getCivilizationsAsync().await().civilizations)
+                _loading.postValue(false)
             }
         }
     }

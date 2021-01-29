@@ -41,6 +41,7 @@ class ListFragment : BaseFragment() {
 
         (activity as MainActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(false)
 
+        // calc gutter between items
         gutter = (resources.getDimension(R.dimen.images_gutter) / 2).toInt()
 
         if(!this::viewManager.isInitialized) {
@@ -49,6 +50,7 @@ class ListFragment : BaseFragment() {
 
         if(!this::viewAdapter.isInitialized) {
             viewAdapter = CivilizationsListAdapter(requireActivity().applicationContext) { civilization: Civilization ->
+                // Click event. Set bundle and move to detail fragment
                 val bundle = Bundle()
                 bundle.putSerializable("civilization", civilization)
                 val fragment = DetailFragment.newInstance()
@@ -68,6 +70,16 @@ class ListFragment : BaseFragment() {
         viewModel.getCivilizations()
         viewModel.civilizationsList.observe(viewLifecycleOwner, {
             viewAdapter.setItems(it)
+        })
+
+        viewModel.loading.observe(viewLifecycleOwner, {
+            if(it == true) {
+                civilization_list.visibility = View.INVISIBLE
+                progress_bar.visibility = View.VISIBLE
+            } else {
+                civilization_list.visibility = View.VISIBLE
+                progress_bar.visibility = View.GONE
+            }
         })
 
         setListParameters()
