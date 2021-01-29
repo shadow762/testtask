@@ -13,7 +13,7 @@ import javax.inject.Inject
  * maintains an in-memory cache of login status and user credentials information.
  */
 
-class CivilizationsTwoWayRepository @Inject constructor(private val apiDao: ApiDao, private val localCivilizationDao: CivilizationDao): ICivilizationsTwoWayRepository {
+open class CivilizationsTwoWayRepository @Inject constructor(private val apiDao: ApiDao, private val localCivilizationDao: CivilizationDao): ICivilizationsTwoWayRepository {
     override fun getCivilizations(): LiveData<List<Civilization>> {
         return localCivilizationDao.getCivilizations()
     }
